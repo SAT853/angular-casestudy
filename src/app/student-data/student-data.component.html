@@ -1,0 +1,26 @@
+<div class="table-container">
+  <p>Student Data</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th
+          *ngFor="let column of filtered[0] | keys; index as i"
+          (click)="onSort(column)"
+          [ngStyle]="{ cursor: 'pointer' }"
+        >
+          {{ column | titlecase }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filtered">
+        <th scope="row">{{ item.name }}</th>
+        <td>{{ item.class }}</td>
+        <td>{{ item.section }}</td>
+        <td>{{ item.sub1 }}</td>
+        <td>{{ item.sub2 }}</td>
+        <td>{{ item.sub3 }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,6 @@
+<p>Dynamically create div’s on the page with 200x 200 dimensions.</p>
+<div class="div-container" *ngFor="let item of customeDiv">
+  <button (click)="onClick(item)" class="btn btn-primary">
+    Button {{ item }}
+  </button>
+</div>

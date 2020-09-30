@@ -1,0 +1,29 @@
+.table-container {
+  border: 1px solid gray;
+  margin-top: 12px;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: -12px 3px 20px -8px rgba(0, 0, 0, 0.62);
+}
+
+.table-container > p {
+  text-align: left;
+  font-weight: 700;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+  margin-left: 0 auto;
+}
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+  margin: 0 auto;
+}
