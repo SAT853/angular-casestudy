@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { DataService } from './../data.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -6,12 +7,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   templateUrl: './countcontrol.component.html',
   styleUrls: ['./countcontrol.component.css'],
 })
-export class CountcontrolComponent implements OnInit {
+export class CountcontrolComponent implements OnInit, OnDestroy {
   pausedAt: number[];
   inputCount: number;
+  subscription: Subscription;
 
   constructor(private dataSer: DataService) {
-    this.dataSer.countLogs.subscribe((data) => {
+    this.subscription = this.dataSer.countLogs.subscribe((data) => {
       this.pausedAt = data.pausedAt;
     });
   }
@@ -20,13 +22,16 @@ export class CountcontrolComponent implements OnInit {
 
   onStart(): void {
     if (!this.inputCount) {
-      return alert('please valid timer limit');
+      return alert('please enter valid timer limit!');
     }
-
     this.dataSer.startCount(this.inputCount);
   }
 
   onReset(): void {
     this.dataSer.resetCounter();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

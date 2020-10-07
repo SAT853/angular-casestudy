@@ -1,19 +1,25 @@
+import { Subscription } from 'rxjs';
 import { DataService } from './../data.service';
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-countlogs',
   templateUrl: './countlogs.component.html',
   styleUrls: ['./countlogs.component.css'],
 })
-export class CountlogsComponent implements OnInit {
-  startPauseStatus;
+export class CountlogsComponent implements OnInit, OnDestroy {
+  startPauseStatus: any[];
+  subscription: Subscription;
+
   constructor(private dataSer: DataService) {
-    this.dataSer.countLogs.subscribe((data) => {
-      console.log(data);
+    this.subscription = this.dataSer.countLogs.subscribe((data) => {
       this.startPauseStatus = data.startPauseStatus;
     });
   }
 
   ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

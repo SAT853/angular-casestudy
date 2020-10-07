@@ -5,6 +5,9 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
+  private interval: any;
+  count = null;
+  isCounterStarted = false;
   startedCount = 0;
   pausedCount = 0;
   pausedAt: number[] = [];
@@ -12,11 +15,10 @@ export class DataService {
 
   constructor() {}
 
-  // tslint:disable-next-line: variable-name
-  private _mySubj: Subject<{ [k: string]: any }> = new Subject<{
+  private mySubj: Subject<{ [k: string]: any }> = new Subject<{
     [k: string]: any;
   }>();
-  public data: Observable<{ [k: string]: any }> = this._mySubj.asObservable();
+  public data: Observable<{ [k: string]: any }> = this.mySubj.asObservable();
 
   private statusSub: Subject<{ [k: string]: any }> = new Subject<{
     [k: string]: any;
@@ -26,27 +28,29 @@ export class DataService {
     [k: string]: any;
   }> = this.statusSub.asObservable();
 
-  // tslint:disable-next-line: variable-name
-  private _interval;
-  count = 0;
-  isCounterStarted = false;
-
   startCount(inputCount: number): void {
-    if (!this.count) {
+    if (this.count === null) {
       this.count = inputCount;
-      this._mySubj.next({ val: this.count });
+      this.mySubj.next({ val: this.count });
     }
     if (!this.isCounterStarted) {
       this.isCounterStarted = true;
-      this._interval = setInterval(() => {
-        this.count--;
-        this._mySubj.next({ val: this.count });
+      this.interval = setInterval(() => {
+        if (this.count === 1) {
+          this.resetCounter();
+          alert('timer limit reached!');
+        } else {
+          this.count--;
+          this.mySubj.next({ val: this.count });
+        }
       }, 1000);
       this.startedCount++;
       this.startPauseStatus.push({
         status: 'Started',
         timeStamp: Date.now(),
       });
+
+      // Pass Data to Component
       this.statusSub.next({
         startedCount: this.startedCount,
         pausedCount: this.pausedCount,
@@ -54,14 +58,16 @@ export class DataService {
         startPauseStatus: this.startPauseStatus,
       });
     } else {
+      clearInterval(this.interval);
       this.isCounterStarted = false;
-      clearInterval(this._interval);
       this.pausedCount++;
       this.startPauseStatus.push({
         status: 'Paused',
         timeStamp: Date.now(),
       });
       this.pausedAt.push(this.count);
+
+      // Pass Data to Component
       this.statusSub.next({
         startedCount: this.startedCount,
         pausedCount: this.pausedCount,
@@ -72,14 +78,18 @@ export class DataService {
   }
 
   resetCounter(): void {
-    clearInterval(this._interval);
     this.isCounterStarted = false;
-    this.count = 0;
-    this._mySubj.next({ val: 0 });
+    clearInterval(this.interval);
+    // Reset value to default
+
+    this.count = null;
     this.startPauseStatus = [];
     this.pausedAt = [];
     this.startedCount = 0;
     this.pausedCount = 0;
+
+    // Pass data to component
+    this.mySubj.next({ val: this.count });
     this.statusSub.next({
       startedCount: this.startedCount,
       pausedCount: this.pausedCount,

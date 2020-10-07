@@ -5,9 +5,9 @@ import { Component, DoCheck, OnInit } from '@angular/core';
   templateUrl: './count-down.component.html',
   styleUrls: ['./count-down.component.css'],
 })
-export class CountDownComponent implements OnInit, DoCheck {
+export class CountDownComponent implements OnInit {
   count: number;
-  interval;
+  interval: any;
   isCountStarted = false;
   startedCount = 0;
   pauseCount = 0;
@@ -18,12 +18,6 @@ export class CountDownComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {}
 
-  ngDoCheck(): void {
-    if (this.isCountStarted && this.count <= 0) {
-      alert('timer limit reached!');
-      this.resetCount();
-    }
-  }
   startCount(inputCount: HTMLInputElement): void {
     if (!+inputCount.value) {
       return alert('please enter valid timer limit');
@@ -34,7 +28,12 @@ export class CountDownComponent implements OnInit, DoCheck {
         this.count = +inputCount.value;
       }
       this.interval = setInterval(() => {
-        this.count--;
+        if (this.count === 1) {
+          alert('timer limit reached!');
+          this.resetCount();
+        } else {
+          this.count--;
+        }
       }, 1000);
       this.startedCount++;
       this.isCountStarted = true;
@@ -55,7 +54,7 @@ export class CountDownComponent implements OnInit, DoCheck {
   }
 
   resetCount(): void {
-    this.count = 0;
+    this.count = null;
     this.isCountStarted = false;
     clearInterval(this.interval);
     this.pauseCount = 0;

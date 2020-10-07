@@ -1,22 +1,22 @@
 <div>
-  <!-- <form> -->
-  <div class="form-group">
-    <label for="count">Enter Timer Limit: </label>
-    <input
-      [(ngModel)]="inputCount"
-      type="number"
-      name="count"
-      id="count"
-      class="form-control"
-    />
-  </div>
-  <button class="btn btn-primary mr-2" type="button" (click)="onStart()">
-    Start/Pause
-  </button>
-  <button class="btn btn-danger" type="button" (click)="onReset()">
-    Reset
-  </button>
-  <!-- </form> -->
+  <form>
+    <div class="form-group">
+      <label for="count">Enter Timer Limit: </label>
+      <input
+        [(ngModel)]="inputCount"
+        type="number"
+        name="count"
+        id="count"
+        class="form-control"
+      />
+    </div>
+    <button class="btn btn-primary mr-2" type="button" (click)="onStart()">
+      Start/Pause
+    </button>
+    <button class="btn btn-danger" type="button" (click)="onReset()">
+      Reset
+    </button>
+  </form>
   <div class="counter-status mt-1">
     <p *ngFor="let item of pausedAt">Paused at {{ item }}</p>
   </div>

@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { DataService } from './../data.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -8,16 +9,18 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class CountdisplayComponent implements OnInit, OnDestroy {
   count: number;
-
+  subscription: Subscription;
   constructor(private dataSer: DataService) {
     this.dataSer.resetCounter();
   }
 
   ngOnInit(): void {
-    this.dataSer.data.subscribe((data) => {
+    this.subscription = this.dataSer.data.subscribe((data) => {
       this.count = data.val;
     });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
