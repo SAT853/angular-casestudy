@@ -16,13 +16,9 @@ export class DyanamicDivComponent implements OnInit {
     const currPosition =
       window.innerHeight + document.documentElement.scrollTop;
     const endPosition = document.documentElement.scrollHeight;
-
-    if (currPosition === endPosition) {
+    if (Math.round(currPosition) === Math.round(endPosition)) {
       this.customeDiv.push(this.customeDiv.length + 1);
     }
-    // if (document.documentElement.scrollTop === 0) {
-    //   this.customeDiv.splice(5);
-    // }
   }
 
   onClick(index: number): void {

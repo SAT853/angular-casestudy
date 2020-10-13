@@ -1,0 +1,23 @@
+.product-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.product-header .btn {
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.product-header .custom-select {
+  font-size: 12px;
+  width: 150px;
+  height: 30px;
+  margin-left: 5px;
+  border-radius: 10px;
+  -webkit-appearance: none;
+}
+
+.my-dropdown-toggle::after {
+  content: none;
+}

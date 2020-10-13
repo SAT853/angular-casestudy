@@ -32,9 +32,9 @@ p {
 
 @keyframes rottin {
   from {
-    left: 80px;
+    left: 40px;
   }
   to {
-    left: -80px;
+    left: -40px;
   }
 }

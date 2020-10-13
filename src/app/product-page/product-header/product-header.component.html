@@ -1,0 +1,15 @@
+<div class="product-header mb-3">
+  <button class="btn btn-default mr-2" (click)="onGridTwo()">Grid two</button>
+  <button class="btn btn-default" (click)="onGridFour()">Grid Four</button>
+  <select
+    class="custom-select"
+    id="price"
+    name="price-sort"
+    [(ngModel)]="selected"
+    (change)="onSelect(selected)"
+  >
+    <option *ngFor="let item of sortType" [value]="item">
+      Sort by: {{ item }}
+    </option>
+  </select>
+</div>

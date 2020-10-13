@@ -1,19 +1,4 @@
-<div>
-  <div class="product-header mb-3">
-    <button class="btn btn-default mr-2" (click)="onGridTwo()">Grid two</button>
-    <button class="btn btn-default" (click)="onGridFour()">Grid Four</button>
-    <select
-      class="custom-select"
-      id="price"
-      name="price"
-      (change)="onSelect($event.target.value)"
-    >
-      <option value="low">Price Low to High</option>
-      <option value="high">Price High to Low</option>
-    </select>
-  </div>
-  <app-product-list
-    [gridType]="gridType"
-    [products]="products"
-  ></app-product-list>
+<div class="m-5">
+  <app-product-header></app-product-header>
+  <app-product-list></app-product-list>
 </div>
