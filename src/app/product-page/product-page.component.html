@@ -1,28 +1,19 @@
-<div class="product-header mb-3">
-  <button class="btn btn-default mr-2" (click)="onGridTwo()">Grid two</button>
-  <button class="btn btn-default" (click)="onGridFour()">Grid Four</button>
-  <select
-    class="custom-select"
-    id="price"
-    name="price"
-    (change)="onSelect($event)"
-  >
-    <option value="low">Price Low to High</option>
-    <option value="high">Price High to Low</option>
-  </select>
-</div>
-<div [class]="gridType">
-  <div class="product-row" *ngFor="let product of products">
-    <div class="product">
-      <div class="product-info">
-        <p>{{ product.title }}</p>
-        <p class="product-price">
-          <small>$</small>
-          <strong>{{ product.price }}</strong>
-        </p>
-      </div>
-      <img [src]="product.image" alt="" />
-      <button class="btn btn-sm bg-warning">Add to Basket</button>
-    </div>
+<div>
+  <div class="product-header mb-3">
+    <button class="btn btn-default mr-2" (click)="onGridTwo()">Grid two</button>
+    <button class="btn btn-default" (click)="onGridFour()">Grid Four</button>
+    <select
+      class="custom-select"
+      id="price"
+      name="price"
+      (change)="onSelect($event.target.value)"
+    >
+      <option value="low">Price Low to High</option>
+      <option value="high">Price High to Low</option>
+    </select>
   </div>
+  <app-product-list
+    [gridType]="gridType"
+    [products]="products"
+  ></app-product-list>
 </div>

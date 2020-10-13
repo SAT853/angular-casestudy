@@ -18,14 +18,10 @@ export class CountDownComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  startCount(inputCount: HTMLInputElement): void {
-    if (!+inputCount.value) {
-      return alert('please enter valid timer limit');
-    }
-
+  startCount(count: number): void {
     if (!this.isCountStarted) {
       if (!this.count) {
-        this.count = +inputCount.value;
+        this.count = count;
       }
       this.interval = setInterval(() => {
         if (this.count === 1) {
@@ -54,9 +50,9 @@ export class CountDownComponent implements OnInit {
   }
 
   resetCount(): void {
+    clearInterval(this.interval);
     this.count = null;
     this.isCountStarted = false;
-    clearInterval(this.interval);
     this.pauseCount = 0;
     this.startedCount = 0;
     this.startPauseStatus = [];

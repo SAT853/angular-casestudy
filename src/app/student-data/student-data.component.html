@@ -9,6 +9,17 @@
           [ngStyle]="{ cursor: 'pointer' }"
         >
           {{ column | titlecase }}
+          <span class="sort-icon">
+            <p
+              [ngClass]="
+                sortType == 'asc' && sortTitle === column
+                  ? 'arrow-up'
+                  : sortType === 'dsc' && sortTitle === column
+                  ? 'arrow-down'
+                  : ''
+              "
+            ></p>
+          </span>
         </th>
       </tr>
     </thead>

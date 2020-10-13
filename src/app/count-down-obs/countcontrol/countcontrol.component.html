@@ -1,16 +1,18 @@
 <div>
-  <form>
+  <form #f="ngForm">
     <div class="form-group">
       <label for="count">Enter Timer Limit: </label>
       <input
-        [(ngModel)]="inputCount"
         type="number"
         name="count"
         id="count"
         class="form-control"
+        required
+        pattern="^[1-9]+[0-9]*$"
+        #count
       />
     </div>
-    <button class="btn btn-primary mr-2" type="button" (click)="onStart()">
+    <button class="btn btn-primary mr-2" type="button" (click)="onStart(count)">
       Start/Pause
     </button>
     <button class="btn btn-danger" type="button" (click)="onReset()">

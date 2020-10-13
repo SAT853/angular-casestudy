@@ -1,7 +1,7 @@
 import { productsData } from './products.data';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
-interface Products {
+export interface Products {
   id: string;
   title: string;
   price: number;
@@ -30,13 +30,13 @@ export class ProductPageComponent implements OnInit {
     this.gridType = 'grid-column-four product-container';
   }
 
-  onSelect(e: any): void {
-    if (e.target.value === 'high') {
+  onSelect(sortType: string): void {
+    if (sortType === 'high') {
       this.products.sort((a, b) => {
         return a.price > b.price ? -1 : a.price < b.price ? 1 : 0;
       });
     }
-    if (e.target.value === 'low') {
+    if (sortType === 'low') {
       this.products.sort((a, b) => {
         return a.price > b.price ? 1 : a.price < b.price ? -1 : 0;
       });

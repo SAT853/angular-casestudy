@@ -24,3 +24,17 @@ p {
   text-align: center;
   font-weight: bold;
 }
+
+.banner-container p > span {
+  animation: rottin 2s linear infinite alternate;
+  position: relative;
+}
+
+@keyframes rottin {
+  from {
+    left: 80px;
+  }
+  to {
+    left: -80px;
+  }
+}

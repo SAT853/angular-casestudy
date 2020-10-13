@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CountConstrolComponent } from './count-constrol.component';
+import { CountConstrolComponent } from './count-control.component';
 
 describe('CountConstrolComponent', () => {
   let component: CountConstrolComponent;
@@ -8,9 +8,8 @@ describe('CountConstrolComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CountConstrolComponent ]
-    })
-    .compileComponents();
+      declarations: [CountConstrolComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -20,9 +20,9 @@ export class DyanamicDivComponent implements OnInit {
     if (currPosition === endPosition) {
       this.customeDiv.push(this.customeDiv.length + 1);
     }
-    if (document.documentElement.scrollTop === 0) {
-      this.customeDiv.splice(5);
-    }
+    // if (document.documentElement.scrollTop === 0) {
+    //   this.customeDiv.splice(5);
+    // }
   }
 
   onClick(index: number): void {

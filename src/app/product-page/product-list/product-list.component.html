@@ -1,0 +1,15 @@
+<div [class]="gridType">
+  <div class="product-row" *ngFor="let product of products">
+    <div class="product">
+      <div class="product-info">
+        <p>{{ product.title }}</p>
+        <p class="product-price">
+          <small>$</small>
+          <strong>{{ product.price }}</strong>
+        </p>
+      </div>
+      <img [src]="product.image" alt="" />
+      <button class="btn btn-sm bg-warning">Add to Basket</button>
+    </div>
+  </div>
+</div>
