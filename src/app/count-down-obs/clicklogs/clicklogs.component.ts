@@ -15,7 +15,7 @@ export class ClicklogsComponent implements OnInit, OnDestroy {
   constructor(private dataSer: DataService) {}
 
   ngOnInit(): void {
-    this.subscription = this.dataSer.countLogs.subscribe((data) => {
+    this.subscription = this.dataSer.statusSub.subscribe((data) => {
       this.startedCount = data.startedCount;
       this.pausedCount = data.pausedCount;
     });

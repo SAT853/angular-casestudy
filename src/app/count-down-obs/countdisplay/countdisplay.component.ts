@@ -15,8 +15,8 @@ export class CountdisplayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.dataSer.data.subscribe((data) => {
-      this.count = data.val;
+    this.subscription = this.dataSer.mySubj.subscribe((data: number) => {
+      this.count = data;
     });
   }
 

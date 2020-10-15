@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+
+export interface CountLogs {
+  startedCount: number;
+  pausedCount: number;
+  pausedAt: number[];
+  startPauseStatus: any[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -14,24 +21,14 @@ export class DataService {
   startPauseStatus: any[] = [];
 
   constructor() {}
-
-  private mySubj: Subject<{ [k: string]: any }> = new Subject<{
-    [k: string]: any;
-  }>();
-  public data: Observable<{ [k: string]: any }> = this.mySubj.asObservable();
-
-  private statusSub: Subject<{ [k: string]: any }> = new Subject<{
-    [k: string]: any;
-  }>();
-
-  public countLogs: Observable<{
-    [k: string]: any;
-  }> = this.statusSub.asObservable();
+  // Subjects
+  mySubj: Subject<number> = new Subject<number>();
+  statusSub: Subject<CountLogs> = new Subject<CountLogs>();
 
   startCount(inputCount: number): void {
     if (this.count === null) {
       this.count = inputCount;
-      this.mySubj.next({ val: this.count });
+      this.mySubj.next(this.count);
     }
     if (!this.isCounterStarted) {
       this.isCounterStarted = true;
@@ -41,7 +38,7 @@ export class DataService {
           alert('timer limit reached!');
         } else {
           this.count--;
-          this.mySubj.next({ val: this.count });
+          this.mySubj.next(this.count);
         }
       }, 1000);
       this.startedCount++;
@@ -89,7 +86,7 @@ export class DataService {
     this.pausedCount = 0;
 
     // Pass data to component
-    this.mySubj.next({ val: this.count });
+    this.mySubj.next(this.count);
     this.statusSub.next({
       startedCount: this.startedCount,
       pausedCount: this.pausedCount,

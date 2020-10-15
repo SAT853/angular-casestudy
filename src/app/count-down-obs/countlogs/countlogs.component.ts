@@ -12,7 +12,7 @@ export class CountlogsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private dataSer: DataService) {
-    this.subscription = this.dataSer.countLogs.subscribe((data) => {
+    this.subscription = this.dataSer.statusSub.subscribe((data) => {
       this.startPauseStatus = data.startPauseStatus;
     });
   }

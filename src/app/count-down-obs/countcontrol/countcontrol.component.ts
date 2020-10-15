@@ -2,6 +2,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DataService } from './../data.service';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-countcontrol',
@@ -19,15 +20,19 @@ export class CountcontrolComponent implements OnInit, OnDestroy {
   constructor(private dataSer: DataService) {}
 
   ngOnInit(): void {
-    this.subscription = this.dataSer.countLogs.subscribe((data) => {
+    this.subscription = this.dataSer.statusSub.subscribe((data) => {
       this.pausedAt = data.pausedAt;
     });
 
-    this.dataSer.data.subscribe((data) => {
-      this.count = data.val;
-
-      console.log(this.count);
-    });
+    this.dataSer.mySubj
+      .pipe(
+        map((data) => {
+          return data;
+        })
+      )
+      .subscribe((data: number) => {
+        this.count = data;
+      });
   }
 
   onStart(inputCount: HTMLInputElement): void {
@@ -46,5 +51,6 @@ export class CountcontrolComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.statusSub.unsubscribe();
   }
 }
