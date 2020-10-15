@@ -1,4 +1,5 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { CountControlComponent } from './count-control/count-control.component';
 
 @Component({
   selector: 'app-count-down',
@@ -6,7 +7,8 @@ import { Component, DoCheck, OnInit } from '@angular/core';
   styleUrls: ['./count-down.component.css'],
 })
 export class CountDownComponent implements OnInit {
-  count: number;
+  @ViewChild('child') ChildCom: CountControlComponent;
+  count: number = null;
   interval: any;
   isCountStarted = false;
   startedCount = 0;

@@ -7,6 +7,8 @@
       <app-count-display [counter]="count"> </app-count-display>
       <hr />
       <app-count-control
+        #child
+        [count]="count"
         (resetCountEle)="resetCount()"
         (startCountEle)="startCount($event)"
         [pausedAt]="pausedAt"

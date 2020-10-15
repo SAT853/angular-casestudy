@@ -18,13 +18,14 @@ export class CountControlComponent implements OnInit {
   @Output() startCountEle = new EventEmitter();
   @Input() pausedAt: number[];
   inputcount: number;
+  @Input() count: number;
   constructor() {}
 
   ngOnInit(): void {}
 
   onStart(inputCount: HTMLInputElement): void {
     this.inputcount = +inputCount.value;
-    if (this.inputcount <= 0) {
+    if (this.inputcount <= 0 && !this.count) {
       return alert('please enter valid timer limit');
     }
     this.startCountEle.emit(this.inputcount);
